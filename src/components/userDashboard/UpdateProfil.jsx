@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { profile, profileUpdate } from "../../features/auth/authSlice";
 import { editUserName, cancelUserName } from "../../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { reset } from "../../features/auth/authSlice";
 
 
@@ -16,11 +17,10 @@ const UpdateProfil = () => {
 
   //form display management
   // gestion d'affichage du formulaire
-  const [formUpdate, setFormUpdate] = useState(true);
+  const [formUpdate, setFormUpdate] = useState(true) 
 
-  const { firstName, lastName, isSuccess, isError } = useSelector(
-    (state) => state.auth
-  );
+  const { firstName, lastName, isSuccess, isError } =
+    useSelector((state) => state.auth);
 
   // Display form with "Edit Name" button
   // affichage du formulaire avec le bouton "Edit Name"
@@ -35,8 +35,7 @@ const UpdateProfil = () => {
     setFormUpdate(true);
   };
 
-  //update function for first name, last name or both (user)
-  //fonction de mise à jour du prénom, nom ou les deux (utilisateur)
+ //fuction to update or not the name and last name of user
   const editUser = (e) => {
     e.preventDefault();
 
@@ -44,16 +43,27 @@ const UpdateProfil = () => {
       firstName: firstNameUpdate ? firstNameUpdate : firstName,
       lastName: lastNameUpdate ? lastNameUpdate : lastName,
     };
-
+    
     dispatch(profileUpdate(userDataUpdate));
     setFormUpdate(true);
     dispatch(cancelUserName());
-    dispatch(reset());
+
+      if (isSuccess) {
+        toast.info(
+          "We confirm that the update has been successfully completed.",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            className: "toast-message-updateConfirm",
+          }
+        );
+         dispatch(reset());
+      }
   };
 
-  useEffect(() => {
-    dispatch(profile());
-  }, [dispatch, isSuccess, isError]);
+    useEffect(() => {
+     
+      dispatch(profile());
+    }, [dispatch, isSuccess, isError]);
 
   return (
     <div className="updateProfil">

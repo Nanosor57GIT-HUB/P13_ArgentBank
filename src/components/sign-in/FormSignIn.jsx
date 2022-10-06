@@ -2,7 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { login, reset } from "../../features/auth/authSlice";
+import Spinner from "../../pages/Spinner";
 
 
 const FormSignIn = () => {
@@ -17,13 +19,22 @@ const FormSignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
+    if (isError) {
+      toast.error("You made a mistake in your credentials", {
+        position: toast.POSITION.TOP_CENTER,
+        className: "toast-message-error",
+      });
+    }
     if (user) {
       navigate("/dashboard");
+    }
+    if (user && isSuccess) {
+      toast.success("Welcome to your account ...");
     }
 
     dispatch(reset());
@@ -45,7 +56,14 @@ const FormSignIn = () => {
     };
 
     dispatch(login(userData));
+
+ if (isLoading) {
+    return <Spinner />;
+  }
+
   };
+
+ 
 
   return (
     <div>
@@ -100,4 +118,3 @@ export default FormSignIn;
 
 // steve@rogers.com
 // password456
-

@@ -12,7 +12,7 @@ const DashboardHeader = () => {
   const onLogout = () => {
     dispatch(logout()); 
     dispatch(reset());
-    navigate("/");
+    navigate("/"); 
   };
 
   return (

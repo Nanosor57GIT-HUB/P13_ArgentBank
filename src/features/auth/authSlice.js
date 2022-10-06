@@ -15,6 +15,7 @@ const initialState = {
   message: "",
   firstName: "",
   lastName: "",
+  isEditUser: false,
 };
 
 // Login user
