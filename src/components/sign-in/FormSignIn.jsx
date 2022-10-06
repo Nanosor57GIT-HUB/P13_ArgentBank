@@ -1,37 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login, reset } from "../../features/auth/authSlice";
+
 
 
 const FormSignIn = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
   
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  async function loginUser(e) {
-    e.preventDefault()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-const response = await fetch("http://localhost:3001/api/v1/user/login", {
-  method: 'POST',
-  headers: {
-    'content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    email,
-    password,
-  }),
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
 
-});
+  useEffect(() => {
+   
+    if (user) {
+      navigate("/dashboard");
+    }
+    
 
-const data = await response.json()
-console.log(data);
-if (data.status === 200) {
-localStorage.setItem('token', data.user)
-    alert('login successFull')
-  window.location.href = 'user'
- } else {
-  alert('Please check your userName or password') 
- }
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  }
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
+  };
+
+ 
 
   return (
     <div>
@@ -39,15 +58,16 @@ localStorage.setItem('token', data.user)
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon-content"></i>
           <h1>Sign In</h1>
-          <form onSubmit={loginUser}>
+          <form onSubmit={onSubmit}>
             <div className="input-wrapper">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="email">Username</label>
               <input
                 autoComplete="off"
                 type="email"
-                id="username"
+                id="email"
+                name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={onChange}
               />
             </div>
 
@@ -56,8 +76,9 @@ localStorage.setItem('token', data.user)
               <input
                 type="password"
                 id="password"
+                name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={onChange}
               />
             </div>
 
@@ -66,14 +87,13 @@ localStorage.setItem('token', data.user)
               <label htmlFor="remember-me">Remember me</label>
             </div>
 
-              <button
-                type="submit"
-                className="sign-in-button"
-                value="enterDashboard"
-              >
-                Sign In
-              </button>
-           
+            <button
+              type="submit"
+              className="sign-in-button"
+              value="enterDashboard"
+            >
+              Sign In
+            </button>
           </form>
         </section>
       </div>
@@ -82,7 +102,6 @@ localStorage.setItem('token', data.user)
 };
 
 export default FormSignIn;
-
 
 // steve@rogers.com
 // password456
