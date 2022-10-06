@@ -1,18 +1,10 @@
 import React from "react";
 import UpdateProfil from './UpdateProfil';
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { profile } from "../../features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 const DashboardBody = () => {
 
- const dispatch = useDispatch();
-
 const { firstName, lastName } = useSelector((state) => state.auth);
-
- useEffect(() => {
-   dispatch(profile());
- }, [dispatch, firstName, lastName]);
 
     return (
       <div>

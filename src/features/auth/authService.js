@@ -29,6 +29,20 @@ const profile = async (profileData, token) => {
 
 };
 
+//update profile user
+const profileUpdate = async (profileData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(API_URL + "profile", profileData, config);
+
+   return response.data.body;
+
+};
+
 
 // Logout user
 const logout = () => {
@@ -38,6 +52,7 @@ const logout = () => {
 const authService = {
   login, 
   profile,
+  profileUpdate,
   logout,
 };
 

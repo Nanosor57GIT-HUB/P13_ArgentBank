@@ -1,17 +1,32 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { profile, profileUpdate } from "../../features/auth/authSlice";
+import { editUserName, cancelUserName } from "../../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { reset } from "../../features/auth/authSlice";
 
 
 const UpdateProfil = () => {
+  const dispatch = useDispatch();
+
+  //useState to update or not the name and last name of user
+  // useState pour mettre à jour ou non le nom et le prénom de l'utilisateur
+  const [firstNameUpdate, setFirstNameUpdate] = useState();
+  const [lastNameUpdate, setLastNameUpdate] = useState();
 
   //form display management
   // gestion d'affichage du formulaire
-  const [formUpdate, setFormUpdate] = useState(true) 
+  const [formUpdate, setFormUpdate] = useState(true);
+
+  const { firstName, lastName, isSuccess, isError } = useSelector(
+    (state) => state.auth
+  );
 
   // Display form with "Edit Name" button
   // affichage du formulaire avec le bouton "Edit Name"
   const displayForm = () => {
     setFormUpdate(false);
+    dispatch(editUserName());
   };
 
   //closed form with cancel button
@@ -20,15 +35,25 @@ const UpdateProfil = () => {
     setFormUpdate(true);
   };
 
- //fuction to update or not the name and last name of user
+  //update function for first name, last name or both (user)
+  //fonction de mise à jour du prénom, nom ou les deux (utilisateur)
   const editUser = (e) => {
     e.preventDefault();
 
+    const userDataUpdate = {
+      firstName: firstNameUpdate ? firstNameUpdate : firstName,
+      lastName: lastNameUpdate ? lastNameUpdate : lastName,
+    };
+
+    dispatch(profileUpdate(userDataUpdate));
     setFormUpdate(true);
-      
+    dispatch(cancelUserName());
+    dispatch(reset());
   };
 
-   
+  useEffect(() => {
+    dispatch(profile());
+  }, [dispatch, isSuccess, isError]);
 
   return (
     <div className="updateProfil">
@@ -47,7 +72,7 @@ const UpdateProfil = () => {
                     type="text"
                     autoComplete="off"
                     placeholder="name"
-                   
+                    onChange={(e) => setFirstNameUpdate(e.target.value)}
                   />
                 </label>
               </div>
@@ -59,7 +84,7 @@ const UpdateProfil = () => {
                     type="text"
                     autoComplete="off"
                     placeholder="lastname"
-                  
+                    onChange={(e) => setLastNameUpdate(e.target.value)}
                   />
                 </label>
               </div>

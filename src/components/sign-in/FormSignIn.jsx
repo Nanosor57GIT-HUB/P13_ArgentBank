@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { login, reset } from "../../features/auth/authSlice";
 
 
-
 const FormSignIn = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -23,11 +22,9 @@ const FormSignIn = () => {
   );
 
   useEffect(() => {
-   
     if (user) {
       navigate("/dashboard");
     }
-    
 
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
@@ -49,8 +46,6 @@ const FormSignIn = () => {
 
     dispatch(login(userData));
   };
-
- 
 
   return (
     <div>
@@ -105,5 +100,4 @@ export default FormSignIn;
 
 // steve@rogers.com
 // password456
-
 

@@ -49,9 +49,29 @@ export const profile = createAsyncThunk(
   }
 );
 
+//profile update
+export const profileUpdate = createAsyncThunk(
+  "auth/profileUpdate",
+  async (profileUpdateData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.body.token;
+      return await authService.profileUpdate(profileUpdateData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const logout = createAsyncThunk("auth/logout", async () => {
    authService.logout();
 });
+
 
 
 // Creating a Reducer function with a single function 
@@ -69,7 +89,12 @@ export const authSlice = createSlice({
       state.firstName = "";
       state.lastName = "";
     },
-   
+    editUserName: (state) => {
+      state.isEditUser = true;
+    },
+    cancelUserName: (state) => {
+      state.isEditUser = false;
+    },
   },
   // Response to reducers on createAsyncThunk
   // réponse aux réducteurs sur createAsyncThunk
@@ -108,6 +133,23 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+
+      .addCase(profileUpdate.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(profileUpdate.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
+        state.isError = false;
+        state.message = "";
+      })
+      .addCase(profileUpdate.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
       });
@@ -116,6 +158,7 @@ export const authSlice = createSlice({
 
 export const {
   reset,
-
+  editUserName,
+  cancelUserName,
 } = authSlice.actions;
 export default authSlice.reducer;
