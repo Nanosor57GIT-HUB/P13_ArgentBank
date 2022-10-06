@@ -58,21 +58,12 @@ body {
 .main-nav-item,
 .fa-sign-out {
   text-decoration: none;
-  border: none;
-  background-color: #fff;
-  color: #751a8b;
   margin-right: 0.5rem;
-  font-size: 16px;
   font-weight: bold;
-  cursor: pointer;
 }
 
 .main-nav-item:hover {
   text-decoration: underline;
-}
-
-.main-nav-item:active {
-  color: #12a217;
 }
 
 .main-nav-item-sign {
@@ -85,7 +76,7 @@ body {
 .out {
   display: flex;
   justify-content: space-between;
-  width: 220px;
+  width: 170px;
 }
 
 .main-nav-logo {
@@ -96,11 +87,6 @@ body {
 .main-nav-logo-image {
   max-width: 100%;
   width: 200px;
-}
-
-.logo-dashBoard {
-  display: flex;
-  align-items: center;
 }
 
 .hero {
@@ -291,21 +277,23 @@ body {
   flex: 1;
 }
 
+.edit-button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
+
 .bg-dark-user {
   justify-content: center;
   background-color: #12002b;
   min-height: 88vh;
-  height: 100vh;
-}
-.bg-light-user {
-  justify-content: center;
-  background-color: #3498db;
-  min-height: 88vh;
-  height: 100vh;
 }
 
 .header {
   color: #fff;
+  margin-bottom: 2rem;
 }
 
 .welcome-name {
@@ -342,45 +330,33 @@ body {
 /************** UPDATE-PROFIL ***********/
 .updateProfil {
   display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-.edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px;
-  margin-bottom: 33px;
+  justify-content: center;
+  height: 90px;
 }
 
 .container-updateProfil {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-evenly;
-  width: 100%; 
-  height: 110px;
+  width: 28%;
+  height: 100%;
 }
-
 .profil {
   display: flex;
-  flex-direction: column;
-  width: 460px;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.container-form-profile {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 0;
-}
 .input-firstName,
 .input-lastName {
-  width: 90%;
+  display: flex;
+  justify-content: center;
+  width: 200px;
   height: 28px;
   border-radius: 4px;
   border: none;
-  font-size: 18px;
-  padding-left: 5%;
 }
 
 .input-firstName::placeholder,
@@ -388,26 +364,22 @@ body {
   display: flex;
   align-items: center;
   width: 90%;
+  padding-left: 5%;
   font-size: 1.2rem;
 }
 
 .button-profilUpdate {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 80%;
-  margin: 0 auto;
+  justify-content: space-between;
+  width: 51%;
 }
 
 .btn-submit-update,
 .btn-cancel-update {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-color: #00bc77;
   color: #00bc77;
   background-color: #ffffff;
-  width: 39%;
+  width: 100px;
   height: 25px;
   border-radius: 4px;
   cursor: pointer;
@@ -522,45 +494,3 @@ body {
   color: #005733;
   cursor: pointer;
 }
-
-/*****************************spinner test***********/
-.loadingSpinnerContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loadingSpinner {
-  width: 64px;
-  height: 64px;
-  border: 8px solid;
-  border-color: #000 transparent #555 transparent;
-  border-radius: 50%;
-  animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/************Toastify***************/
-
-.toast-message-error {
-background-color: rgb(0, 188, 120);
-color: #102d22;
-}
-
-
-

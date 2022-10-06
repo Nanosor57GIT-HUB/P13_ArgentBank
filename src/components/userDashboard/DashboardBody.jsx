@@ -2,21 +2,21 @@ import React from "react";
 //import UpdateProfil from './UpdateProfil';
 
 const DashboardBody = () => {
+
+  
   return (
     <div>
-      <main className="bg-dark-user">
+      <main className="main bg-dark-user">
         <div className="header">
           <h1 className="welcome-name">
             Welcome back
             <br />
-            <span>Tony Jarvis !</span>
+            Tony Jarvis!
           </h1>
+
+          <button className="edit-button">Edit Name</button>
         </div>
-
-        <button className="edit-button">Edit Name</button>
-
         {/* <UpdateProfil /> */}
-
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
           <div className="account-content-wrapper">
