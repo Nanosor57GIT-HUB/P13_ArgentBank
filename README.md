@@ -1,72 +1,91 @@
-# Project #10 - Argent Bank API
+<img src='./public/img/argentBankLogo.png' width="180" />
 
-This codebase contains the code needed to run the backend for Argent Bank.
 
-## Getting Started
+# Projet 13 - Argent Bank/OpenClassrooms
+--- 
+##### Project realized by Thierry Friedrich
+----
+Argent Bank is a new bank that wants to break into the sector.
 
-### Prerequisites
+This project is responsive. You can use this app on desktop, tablet or mobile.
+----
 
-Argent Bank uses the following tech stack:
+## Prerequisites
 
-- [Node.js v12](https://nodejs.org/en/)
+- [NodeJS (version 14.20.0 LTS)]
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
 Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
 
-```bash
-# Check Node.js version
-node --version
+```
+## Langage: Javascript
+## Framework: React
+## Data-flow architecture: Redux
 
-# Check Mongo version
-mongo --version
 ```
 
-### Instructions
+## Dependencies:
 
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+- @reduxjs/toolkit (version 1.8.4)
+- Axios (version 0.27.2)
+- React (version 18.2.0)
+- React-dom (version 18.2.0)
+- React-redux (version 8.0.2)
+- React-router-dom (version 6.3.0)
+- react-toastify: (version 9.0.8)
+- toastify (version 2.0.1)
 
-```bash
-# Install dependencies
+
+## How to install
+
+- Create a main directory
+
+### 1- Back-End
+
+1. Download or clone the back-end's repository: [Back-end](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
+
+2. Follow all the instructions on the backend reposity.
+
+<hr/>
+
+### 2 - Front-End
+
+1 - Open new terminal on VsCode.
+
+2 - Clone this reposity:
+
+```
+git clone [my repository](https://github.com/Nanosor57GIT-HUB/P13_ArgentBank)
+```
+
+3 - Install node modules and dependencies:
+
+```
 npm install
-
-# Start local dev server
-npm run dev:server
-
-# Populate database with two users
-npm run populate-db
 ```
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
+4 - Start the application:
 
-## Populated Database Data
+```
+npm start
+```
 
-Once you run the `populate-db` script, you should have two users in your database:
+The application will be rendered at URL `http://localhost:3000`
 
-### Tony Stark
+When the application starts, click on sign-in to connect
 
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
+##### For the test, only two users are available:
 
-### Steve Rogers
+```
+name: Tony Stark
+password: password123
 
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
+name: Steve Rogers
+password: password456
 
-## API Documentation
+```
 
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+<hr/>
 
-## Design Assets
 
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
 
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
-
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
